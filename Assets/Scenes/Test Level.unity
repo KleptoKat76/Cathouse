@@ -478,6 +478,11 @@ PrefabInstance:
       propertyPath: playerSpeed
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 6522617581133396099, guid: 7894df8ce571e2d4fa9b965fa10607ba,
+        type: 3}
+      propertyPath: ground.m_Bits
+      value: 256
+      objectReference: {fileID: 0}
     - target: {fileID: 6522617581133396127, guid: 7894df8ce571e2d4fa9b965fa10607ba,
         type: 3}
       propertyPath: m_LinearDrag

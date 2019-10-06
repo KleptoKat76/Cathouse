@@ -5,6 +5,7 @@ using UnityEngine;
 public class GunController : MonoBehaviour
 {
     public float shootCooldown;
+    private float timer;
     private Transform nozzle;
     // Start is called before the first frame update
     void Start()

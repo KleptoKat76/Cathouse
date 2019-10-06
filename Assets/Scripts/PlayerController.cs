@@ -75,7 +75,10 @@ public class PlayerController : MonoBehaviour
             gun.Shoot(bulletType);
         }
     }
-
+    public void doReflect()
+    {
+        //PATRICK
+    }
 }
 
 

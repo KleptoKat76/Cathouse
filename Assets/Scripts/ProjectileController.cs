@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Projectile : MonoBehaviour
+public class ProjectileController : MonoBehaviour
 {
     //Settable Variables
     public float m_speed;
@@ -10,8 +10,10 @@ public class Projectile : MonoBehaviour
 
     //Physics Calculation
     private Rigidbody2D rb;
-    
-
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        //ANDREW 
+    }
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -22,7 +24,7 @@ public class Projectile : MonoBehaviour
         m_dieTime -= Time.deltaTime;
         if(m_dieTime <= 0)
         {
-            Destroy(gameObject);
+            Destroy(this.gameObject);
         }
     }
 }
