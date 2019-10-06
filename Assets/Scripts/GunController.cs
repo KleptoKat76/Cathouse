@@ -5,10 +5,11 @@ using UnityEngine;
 public class GunController : MonoBehaviour
 {
     public float shootCooldown;
+    private Transform nozzle;
     // Start is called before the first frame update
     void Start()
     {
-        
+        nozzle = transform.GetChild(0);
     }
 
     // Update is called once per frame
@@ -28,6 +29,6 @@ public class GunController : MonoBehaviour
     }
     public void Shoot(GameObject bullet)
     {
-        Instantiate(bullet, transform.GetChild(0).position, transform.GetChild(0).rotation);
+        Instantiate(bullet, nozzle.position, nozzle.rotation);
     }
 }

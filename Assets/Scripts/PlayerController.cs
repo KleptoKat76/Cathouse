@@ -4,8 +4,17 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    private Rigidbody2D rb;
+    //Side Movement
     public float playerSpeed;
+    private Rigidbody2D rb;
+    //Jump variables
+    public float jumpForce;
+    public LayerMask ground;
+    private bool grounded;
+    private GameObject groundCheck;
+    //Fast Fall variable
+    public float fastFallMultiplier;
+    //Shooting variables
     public GameObject projectile;
     private GunController gun;
 
@@ -14,6 +23,13 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         gun = GetComponentInChildren<GunController>();
+        foreach(Transform child in transform)
+        {
+            if(child.gameObject.name == "GroundCheck")
+            {
+                groundCheck = child.gameObject;
+            }
+        }
     }
 
     // Update is called once per frame
@@ -25,21 +41,26 @@ public class PlayerController : MonoBehaviour
 
     public void checkPlayerMovement()
     {
+        grounded = Physics2D.OverlapCircle(groundCheck.transform.position, .1f, ground);
         if (Input.GetKey(KeyCode.A))
         {
-            rb.velocity = new Vector3(-playerSpeed, rb.velocity.y, 0);
+            rb.velocity = new Vector2(-playerSpeed, rb.velocity.y);
         }  
-        if (Input.GetKey(KeyCode.W))
+        if (Input.GetKeyDown(KeyCode.W) && grounded)
         {
-            rb.velocity = new Vector3(rb.velocity.x, playerSpeed, 0);
+            rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
         }
-        if (Input.GetKey(KeyCode.S))
+        //else if (Input.GetKeyUp(KeyCode.W))
+        //{
+        //    rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y / 3);
+        //}
+        if (Input.GetKeyDown(KeyCode.S) && !grounded)
         {
-            rb.velocity = new Vector3(rb.velocity.x, -playerSpeed, 0);
+            rb.velocity = new Vector2(rb.velocity.x, fastFallMultiplier * jumpForce) * -transform.up;
         }
         if (Input.GetKey(KeyCode.D))
         {
-            rb.velocity = new Vector3(playerSpeed, rb.velocity.y, 0);
+            rb.velocity = new Vector2(playerSpeed, rb.velocity.y);
         }
  
     }
