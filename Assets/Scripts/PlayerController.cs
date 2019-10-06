@@ -50,10 +50,13 @@ public class PlayerController : MonoBehaviour
         {
             rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
         }
-        //else if (Input.GetKeyUp(KeyCode.W))
-        //{
-        //    rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y / 3);
-        //}
+        else if (Input.GetKeyUp(KeyCode.W))
+        {
+            if (rb.velocity.y > 0)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, 0);
+            }
+        }
         if (Input.GetKeyDown(KeyCode.S) && !grounded)
         {
             rb.velocity = new Vector2(rb.velocity.x, fastFallMultiplier * jumpForce) * -transform.up;
