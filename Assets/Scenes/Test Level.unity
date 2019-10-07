@@ -488,5 +488,10 @@ PrefabInstance:
       propertyPath: m_LinearDrag
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6522617581133396127, guid: 7894df8ce571e2d4fa9b965fa10607ba,
+        type: 3}
+      propertyPath: m_GravityScale
+      value: 1.64
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7894df8ce571e2d4fa9b965fa10607ba, type: 3}
