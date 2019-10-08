@@ -11,6 +11,7 @@ public class GunController : MonoBehaviour
     void Start()
     {
         nozzle = transform.GetChild(0);
+        timer = shootCooldown;
     }
 
     // Update is called once per frame
@@ -28,8 +29,16 @@ public class GunController : MonoBehaviour
         var direction = mousePos - transform.position;
         transform.up = direction;
     }
+    private void FixedUpdate()
+    {
+        timer -= Time.deltaTime;
+    }
     public void Shoot(GameObject bullet)
     {
-        Instantiate(bullet, nozzle.position, nozzle.rotation);
+        if (timer <= 0)
+        {
+            Instantiate(bullet, nozzle.position, nozzle.rotation);
+            timer = shootCooldown;
+        }
     }
 }
