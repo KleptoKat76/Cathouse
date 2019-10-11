@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    //Controller
+    public Controller controller;
+    private ControlScheme cntrlSchm;
     //Side Movement
     public float playerSpeed;
     private Rigidbody2D rb;
     public float maxSpeedX;
+    public float maxSpeedY;
     //Jump variables
     public float jumpForce;
     public LayerMask ground;
@@ -19,9 +23,15 @@ public class PlayerController : MonoBehaviour
     public GameObject projectile;
     private GunController gun;
 
+    
+    public enum Controller
+    {
+        contr0, contr1, contr2, contr3, keyboard
+    }
     // Start is called before the first frame update
     void Start()
     {
+        cntrlSchm = new ControlScheme(controller);
         rb = GetComponent<Rigidbody2D>();
         gun = GetComponentInChildren<GunController>();
         foreach(Transform child in transform)
@@ -42,32 +52,26 @@ public class PlayerController : MonoBehaviour
 
     public void checkPlayerMovement()
     {
-        grounded = Physics2D.OverlapCircle(groundCheck.transform.position, .1f, ground);
-        //Walk Left
-        if (Input.GetKey(KeyCode.A))
+        grounded = Physics2D.OverlapCircle(groundCheck.transform.position, .2f, ground);
+        float horizontalInput = Input.GetAxis(cntrlSchm.HorizontalAxis);
+        float verticalInput = Input.GetAxis(cntrlSchm.VerticalAxis);
+        //Walk 
+        rb.AddForce(playerSpeed * horizontalInput * transform.right);
+        if(Mathf.Abs(rb.velocity.x) > maxSpeedX)
         {
-            rb.AddForce(-playerSpeed * transform.right);
-            if(rb.velocity.x < -maxSpeedX)
-            {
-                rb.velocity = new Vector2(rb.velocity.x / 1.1f, rb.velocity.y);
-            }
-        }
-        //Walk Right
-        if (Input.GetKey(KeyCode.D))
-        {
-            rb.AddForce(playerSpeed * transform.right);
-            if (rb.velocity.x > maxSpeedX)
-            {
-                rb.velocity = new Vector2(rb.velocity.x / 1.1f, rb.velocity.y);
-            }
+            rb.velocity = new Vector2(rb.velocity.x / 1.1f, rb.velocity.y);
         }
         //Jump
-        if (Input.GetKeyDown(KeyCode.W) && grounded)
+        if (Input.GetAxis(cntrlSchm.JumpAxis) > 0 && grounded)
         {
-            rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
+            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            if (rb.velocity.y > maxSpeedY)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y / 1.1f);
+            }
         }
         //Smaller Jump
-        else if (Input.GetKeyUp(KeyCode.W))
+        else if (Input.GetAxis(cntrlSchm.JumpAxis) <= 0 && !grounded)
         {
             if (rb.velocity.y > 0)
             {
@@ -75,7 +79,7 @@ public class PlayerController : MonoBehaviour
             }
         }
         //Fast Fall
-        if (Input.GetKeyDown(KeyCode.S) && !grounded)
+        if (verticalInput < 0 && !grounded)
         {
             rb.velocity = new Vector2(rb.velocity.x, fastFallMultiplier * jumpForce) * -transform.up;
         }

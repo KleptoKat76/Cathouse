@@ -1,0 +1,36 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class ControlScheme : MonoBehaviour
+{
+    private string horizontalAxis;
+    private string verticalAxis;
+    private string jumpAxis;
+    private string reflectAxis;
+    private string gunAimXAxis;
+    private string gunAimYAxis;
+
+    public string HorizontalAxis { get => horizontalAxis; set => horizontalAxis = value; }
+    public string VerticalAxis { get => verticalAxis; set => verticalAxis = value; }
+    public string JumpAxis { get => jumpAxis; set => jumpAxis = value; }
+    public string ReflectAxis { get => reflectAxis; set => reflectAxis = value; }
+    public string GunAimXAxis { get => gunAimXAxis; set => gunAimXAxis = value; }
+    public string GunAimYAxis { get => gunAimYAxis; set => gunAimYAxis = value; }
+
+    public ControlScheme(PlayerController.Controller controller){
+        string controllerType = "";
+        if(controller != PlayerController.Controller.keyboard)
+        {
+            controllerType = "joy_" + controller.ToString().Substring(controller.ToString().Length - 1);
+        }
+        else
+        {
+            controllerType = "keyboard";
+        }
+        HorizontalAxis = controllerType + "_axis_0";
+        VerticalAxis = controllerType + "_axis_1";
+        JumpAxis = controllerType + "_axis_6";
+        print(HorizontalAxis);
+    }
+}
