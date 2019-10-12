@@ -20,7 +20,6 @@ public class PlayerController : MonoBehaviour
     //Fast Fall variable
     public float fastFallMultiplier;
     //Shooting variables
-    public GameObject projectile;
     private GunController gun;
 
     
@@ -46,10 +45,12 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        checkPlayerMovement();
-        checkShoot(projectile);
+        checkShoot();
     }
-
+    private void FixedUpdate()
+    {
+        checkPlayerMovement();
+    }
     public void checkPlayerMovement()
     {
         grounded = Physics2D.OverlapCircle(groundCheck.transform.position, .2f, ground);
@@ -90,7 +91,7 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetMouseButton(0))
         {
-            gun.Shoot(bulletType);
+            gun.Shoot();
         }
     }
     public void doReflect()

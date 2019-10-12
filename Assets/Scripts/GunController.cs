@@ -7,6 +7,7 @@ public class GunController : MonoBehaviour
     public float shootCooldown;
     private float timer;
     private Transform nozzle;
+    public GameObject projectile;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,11 +34,11 @@ public class GunController : MonoBehaviour
     {
         timer -= Time.deltaTime;
     }
-    public void Shoot(GameObject bullet)
+    public void Shoot()
     {
         if (timer <= 0)
         {
-            Instantiate(bullet, nozzle.position, nozzle.rotation);
+            Instantiate(projectile, nozzle.position, nozzle.rotation);
             timer = shootCooldown;
         }
     }

@@ -10,6 +10,9 @@ public class ProjectileController : MonoBehaviour
 
     //Physics Calculation
     private Rigidbody2D rb;
+
+    //Ownership
+    private PlayerController.Controller owner;
     private void OnCollisionEnter2D(Collision2D collision)
     {
         //ANDREW 
