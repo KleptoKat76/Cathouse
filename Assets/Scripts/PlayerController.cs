@@ -87,7 +87,7 @@ public class PlayerController : MonoBehaviour
  
     }
 
-    public void checkShoot(GameObject bulletType)
+    public void checkShoot()
     {
         if (Input.GetMouseButton(0))
         {
