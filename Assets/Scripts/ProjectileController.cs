@@ -12,7 +12,7 @@ public class ProjectileController : MonoBehaviour
     private Rigidbody2D rb;
 
     //Ownership
-    private PlayerController.Controller owner;
+    private PlayerController.PlayerID owner;
     private void OnCollisionEnter2D(Collision2D collision)
     {
         //ANDREW 

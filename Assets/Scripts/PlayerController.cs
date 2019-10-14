@@ -27,6 +27,10 @@ public class PlayerController : MonoBehaviour
     {
         contr0, contr1, contr2, contr3, keyboard
     }
+    public enum PlayerID
+    {
+        p1, p2, p3, p4
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -53,7 +57,7 @@ public class PlayerController : MonoBehaviour
     }
     public void checkPlayerMovement()
     {
-        grounded = Physics2D.OverlapCircle(groundCheck.transform.position, .2f, ground);
+        grounded = Physics2D.OverlapCircle(groundCheck.transform.position, .4f, ground);
         float horizontalInput = Input.GetAxis(cntrlSchm.HorizontalAxis);
         float verticalInput = Input.GetAxis(cntrlSchm.VerticalAxis);
         //Walk 
