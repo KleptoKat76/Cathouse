@@ -23,10 +23,14 @@ public class ControlScheme : MonoBehaviour
         if(controller != PlayerController.Controller.keyboard)
         {
             controllerType = "joy_" + controller.ToString().Substring(controller.ToString().Length - 1);
+            GunAimXAxis = controllerType + "_axis_4";
+            GunAimYAxis = controllerType + "_axis_5";
         }
         else
         {
             controllerType = "keyboard";
+            GunAimXAxis = "mouseXMovement";
+            GunAimYAxis = "mouseYMovement";
         }
         HorizontalAxis = controllerType + "_axis_0";
         VerticalAxis = controllerType + "_axis_1";

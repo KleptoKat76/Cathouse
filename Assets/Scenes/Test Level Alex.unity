@@ -1245,7 +1245,12 @@ PrefabInstance:
     - target: {fileID: 6522617581133396099, guid: 7894df8ce571e2d4fa9b965fa10607ba,
         type: 3}
       propertyPath: jumpForce
-      value: 11
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 6522617581133396099, guid: 7894df8ce571e2d4fa9b965fa10607ba,
+        type: 3}
+      propertyPath: playerSpeed
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 6522617581133396127, guid: 7894df8ce571e2d4fa9b965fa10607ba,
         type: 3}
@@ -1261,6 +1266,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_CollisionDetection
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6522617581133396127, guid: 7894df8ce571e2d4fa9b965fa10607ba,
+        type: 3}
+      propertyPath: m_GravityScale
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6522617582114726641, guid: 7894df8ce571e2d4fa9b965fa10607ba,
         type: 3}
