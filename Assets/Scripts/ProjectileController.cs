@@ -10,24 +10,34 @@ public class ProjectileController : MonoBehaviour
 
     //Physics Calculation
     private Rigidbody2D rb;
+    private Vector2 m_dir;
 
     //Ownership
     private PlayerGameState.PlayerID owner;
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        //ANDREW 
-    }
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        rb.velocity = transform.up * m_speed;
     }
     private void FixedUpdate()
     {
-        rb.velocity = transform.up * m_speed;
+        //rb.velocity = transform.up * m_speed;
         m_dieTime -= Time.deltaTime;
         if(m_dieTime <= 0)
         {
             Destroy(this.gameObject);
+        }
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log("ok");
+        //ANDREW 
+        if (collision.gameObject.CompareTag("Reflective"))
+        {
+            Debug.Log("ain't wokring");
+            Vector2 wallNormal = collision.GetContact(0).normal;
+            m_dir = Vector2.Reflect(rb.velocity, wallNormal).normalized;
+            rb.velocity = m_dir * m_speed;
         }
     }
 }
