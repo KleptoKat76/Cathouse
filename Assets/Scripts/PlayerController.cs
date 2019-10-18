@@ -27,7 +27,6 @@ public class PlayerController : MonoBehaviour
     //Sprite Facing
     private Direction dir;
     private SpriteRenderer sprtRend;
-
     public enum Controller
     {
         contr0, contr1, contr2, contr3, keyboard
@@ -134,6 +133,7 @@ public class PlayerController : MonoBehaviour
     {
         return new ControlScheme(controller);
     }
+  
 }
 
 
