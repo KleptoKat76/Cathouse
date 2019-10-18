@@ -25,7 +25,6 @@ public class PlayerController : MonoBehaviour
     //Sprite Facing
     private Direction dir;
     private SpriteRenderer sprtRend;
-
     public enum Controller
     {
         contr0, contr1, contr2, contr3, keyboard
@@ -123,6 +122,7 @@ public class PlayerController : MonoBehaviour
     {
         transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
     }
+  
 }
 
 

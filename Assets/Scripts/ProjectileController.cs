@@ -30,14 +30,13 @@ public class ProjectileController : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("ok");
         //ANDREW 
         if (collision.gameObject.CompareTag("Reflective"))
         {
-            Debug.Log("ain't wokring");
             Vector2 wallNormal = collision.GetContact(0).normal;
             m_dir = Vector2.Reflect(rb.velocity, wallNormal).normalized;
             rb.velocity = m_dir * m_speed;
         }
     }
+
 }
