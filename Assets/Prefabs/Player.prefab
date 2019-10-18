@@ -240,30 +240,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2599204858675451706, guid: 629b3fa8ebf10cb41a58e825b3efc46b,
+    - target: {fileID: 2599204858554076063, guid: 629b3fa8ebf10cb41a58e825b3efc46b,
         type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.42
-      objectReference: {fileID: 0}
-    - target: {fileID: 2599204858675451706, guid: 629b3fa8ebf10cb41a58e825b3efc46b,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.44
-      objectReference: {fileID: 0}
-    - target: {fileID: 2599204858675451708, guid: 629b3fa8ebf10cb41a58e825b3efc46b,
-        type: 3}
-      propertyPath: shootCooldown
-      value: 0.5
+      propertyPath: m_Name
+      value: Muzzle Position
       objectReference: {fileID: 0}
     - target: {fileID: 2599204858675451707, guid: 629b3fa8ebf10cb41a58e825b3efc46b,
         type: 3}
       propertyPath: m_SpriteSortPoint
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2599204858554076063, guid: 629b3fa8ebf10cb41a58e825b3efc46b,
-        type: 3}
-      propertyPath: m_Name
-      value: Muzzle Position
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 629b3fa8ebf10cb41a58e825b3efc46b, type: 3}

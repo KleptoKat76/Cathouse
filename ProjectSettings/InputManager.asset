@@ -55,8 +55,8 @@ InputManager:
     joyNum: 0
   - serializedVersion: 3
     m_Name: joy_0_axis_0
-    descriptiveName: 
-    descriptiveNegativeName: 
+    descriptiveName: Move Right
+    descriptiveNegativeName: Move Left
     negativeButton: 
     positiveButton: 
     altNegativeButton: 
@@ -71,17 +71,17 @@ InputManager:
     joyNum: 1
   - serializedVersion: 3
     m_Name: joy_0_axis_1
-    descriptiveName: 
-    descriptiveNegativeName: 
+    descriptiveName: Up
+    descriptiveNegativeName: Fast Fall/Crouch
     negativeButton: 
     positiveButton: 
     altNegativeButton: 
     altPositiveButton: 
-    gravity: 0
-    dead: 0
+    gravity: 5
+    dead: 0.9
     sensitivity: 1
     snap: 0
-    invert: 0
+    invert: 1
     type: 2
     axis: 1
     joyNum: 1
@@ -103,15 +103,15 @@ InputManager:
     joyNum: 1
   - serializedVersion: 3
     m_Name: joy_0_axis_3
-    descriptiveName: 
+    descriptiveName: Gun Aim X
     descriptiveNegativeName: 
     negativeButton: 
     positiveButton: 
     altNegativeButton: 
     altPositiveButton: 
-    gravity: 0
-    dead: 0
-    sensitivity: 1
+    gravity: 0.4
+    dead: 0.1
+    sensitivity: 0.5
     snap: 0
     invert: 0
     type: 2
@@ -119,17 +119,17 @@ InputManager:
     joyNum: 1
   - serializedVersion: 3
     m_Name: joy_0_axis_4
-    descriptiveName: 
+    descriptiveName: Gun Aim Y
     descriptiveNegativeName: 
     negativeButton: 
     positiveButton: 
     altNegativeButton: 
     altPositiveButton: 
-    gravity: 0
-    dead: 0
-    sensitivity: 1
+    gravity: 0.4
+    dead: 0.1
+    sensitivity: 0.5
     snap: 0
-    invert: 0
+    invert: 1
     type: 2
     axis: 4
     joyNum: 1
@@ -147,23 +147,23 @@ InputManager:
     snap: 0
     invert: 0
     type: 2
-    axis: 5
+    axis: 8
     joyNum: 1
   - serializedVersion: 3
     m_Name: joy_0_axis_6
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: 
+    positiveButton: joystick button 5
     altNegativeButton: 
     altPositiveButton: 
-    gravity: 0
-    dead: 0
+    gravity: 1000
+    dead: 0.1
     sensitivity: 1
     snap: 0
     invert: 0
-    type: 2
-    axis: 6
+    type: 0
+    axis: 27
     joyNum: 1
   - serializedVersion: 3
     m_Name: joy_0_axis_7
@@ -615,22 +615,6 @@ InputManager:
     joyNum: 4
   - serializedVersion: 3
     m_Name: keyboard_axis_5
-    descriptiveName: 
-    descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: 
-    altNegativeButton: 
-    altPositiveButton: 
-    gravity: 0
-    dead: 0
-    sensitivity: 1
-    snap: 0
-    invert: 0
-    type: 2
-    axis: 5
-    joyNum: 4
-  - serializedVersion: 3
-    m_Name: keyboard_axis_6
     descriptiveName: Jump
     descriptiveNegativeName: 
     negativeButton: 
@@ -640,6 +624,22 @@ InputManager:
     gravity: 1000
     dead: 0.1
     sensitivity: 1000
+    snap: 0
+    invert: 0
+    type: 0
+    axis: 0
+    joyNum: 4
+  - serializedVersion: 3
+    m_Name: keyboard_axis_6
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: mouse 0
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 1000
+    dead: 0.1
+    sensitivity: 1
     snap: 0
     invert: 0
     type: 0

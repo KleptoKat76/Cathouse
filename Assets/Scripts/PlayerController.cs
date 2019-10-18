@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    //Player ID
+    private PlayerGameState.PlayerID playerID;
     //Controller
     public Controller controller;
     private ControlScheme cntrlSchm;
@@ -63,19 +65,21 @@ public class PlayerController : MonoBehaviour
     }
     public void checkPlayerMovement()
     {
+        //Ground stuff
         grounded = Physics2D.OverlapCircle(groundCheck.transform.position, .4f, ground);
+        //Horiz. vert. input 
         float horizontalInput = Input.GetAxis(cntrlSchm.HorizontalAxis);
         float verticalInput = Input.GetAxis(cntrlSchm.VerticalAxis);
         //Sprite Flip
         if(horizontalInput < 0 && dir == Direction.right)
         {
             dir = Direction.left;
-            flipSprite();
+            sprtRend.flipX = !sprtRend.flipX;
         }
         else if(horizontalInput > 0 && dir == Direction.left)
         {
             dir = Direction.right;
-            flipSprite();
+            sprtRend.flipX = !sprtRend.flipX;
         }
         //Walk 
         rb.AddForce(playerSpeed * horizontalInput * transform.right);
@@ -84,33 +88,40 @@ public class PlayerController : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x / 1.1f, rb.velocity.y);
         }
         //Jump
-        if (Input.GetAxisRaw(cntrlSchm.JumpAxis) > 0 && grounded)
+        if (Input.GetAxis(cntrlSchm.JumpAxis) > 0 && grounded && jumpKeyUp)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             if (rb.velocity.y > maxSpeedY)
             {
                 rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y / 1.1f);
             }
+            jumpKeyUp = false;
         }
         //Smaller Jump
         else if (Input.GetAxis(cntrlSchm.JumpAxis) <= 0 && !grounded)
         {
+            jumpKeyUp = true;
             if (rb.velocity.y > 0)
             {
                 rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y / 2);
             }
         }
+        if(Input.GetAxis(cntrlSchm.JumpAxis) <= 0)
+        {
+            jumpKeyUp = true;
+        }
         //Fast Fall
         if (verticalInput < 0 && !grounded)
         {
-            rb.velocity = new Vector2(rb.velocity.x, fastFallMultiplier * jumpForce) * -transform.up;
+            rb.AddForce(-transform.up * fastFallMultiplier * 3, ForceMode2D.Impulse);
+            //rb.velocity = new Vector2(rb.velocity.x, fastFallMultiplier * jumpForce) * -transform.up;
         }
  
     }
 
     public void checkShoot()
     {
-        if (Input.GetMouseButton(0))
+        if (Input.GetAxis(cntrlSchm.ShootAxis) > 0)
         {
             gun.Shoot();
         }
@@ -119,9 +130,9 @@ public class PlayerController : MonoBehaviour
     {
         //PATRICK
     }
-    private void flipSprite()
+    public ControlScheme getControlScheme()
     {
-        transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+        return new ControlScheme(controller);
     }
 }
 
