@@ -35,6 +35,7 @@ public class ProjectileController : MonoBehaviour
         {
             Vector2 wallNormal = collision.GetContact(0).normal;
             m_dir = Vector2.Reflect(rb.velocity, wallNormal).normalized;
+            transform.up = m_dir;
             rb.velocity = m_dir * m_speed;
         }
     }
