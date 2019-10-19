@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     //Controller
     public Controller controller;
+    private float parryTime = 1.0f;
     private ControlScheme cntrlSchm;
     //Side Movement
     public float playerSpeed;
@@ -39,6 +40,7 @@ public class PlayerController : MonoBehaviour
             {
                 groundCheck = child.gameObject;
             }
+
         }
     }
 
@@ -46,10 +48,12 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         checkShoot();
+
     }
     private void FixedUpdate()
     {
         checkPlayerMovement();
+        doReflect();
     }
     public void checkPlayerMovement()
     {
@@ -94,10 +98,7 @@ public class PlayerController : MonoBehaviour
             gun.Shoot();
         }
     }
-    public void doReflect()
-    {
-        //PATRICK
-    }
+
 }
 
 

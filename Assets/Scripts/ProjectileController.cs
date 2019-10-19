@@ -15,7 +15,7 @@ public class ProjectileController : MonoBehaviour
     private PlayerController.Controller owner;
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        //ANDREW 
+        //ANDREW
     }
     private void Start()
     {
@@ -29,5 +29,8 @@ public class ProjectileController : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+
     }
+
+
 }
