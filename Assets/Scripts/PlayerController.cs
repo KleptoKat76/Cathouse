@@ -34,6 +34,7 @@ public class PlayerController : MonoBehaviour
     private float reflectTimer;
     public float reflectCooldown;
     public float reflectDuration;
+    public GameObject reflectHitbox;
 
     public enum Controller
     {
@@ -147,6 +148,7 @@ public class PlayerController : MonoBehaviour
                 currentlyReflecting = true;
                 canReflect = false;
                 reflectTimer = reflectCooldown;
+                Instantiate(reflectHitbox, transform);
                 StartCoroutine(waitReflect(reflectDuration));
             }
         }
@@ -157,16 +159,6 @@ public class PlayerController : MonoBehaviour
         if (reflectTimer < 0)
         {
             canReflect = true;
-        }
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.collider.GetType() == typeof(CapsuleCollider2D) && 
-            collision.gameObject.CompareTag("Bullet"))
-        {
-            var currentController = collision.gameObject.GetComponent<ProjectileController>();
-            currentController.reflectBullet();
         }
     }
 
