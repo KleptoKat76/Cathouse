@@ -166,7 +166,7 @@ public class PlayerController : MonoBehaviour
             collision.gameObject.CompareTag("Bullet"))
         {
             var currentController = collision.gameObject.GetComponent<ProjectileController>();
-            currentController.ReflectBullet();
+            currentController.reflectBullet();
         }
     }
 
