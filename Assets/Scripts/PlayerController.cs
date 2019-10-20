@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    //Player ID
+    private PlayerGameState.PlayerID playerID;
     //Controller
     public Controller controller;
     private float parryTime = 1.0f;
@@ -18,19 +20,36 @@ public class PlayerController : MonoBehaviour
     public LayerMask ground;
     private bool grounded;
     private GameObject groundCheck;
+    private bool jumpKeyUp;
     //Fast Fall variable
     public float fastFallMultiplier;
     //Shooting variables
     private GunController gun;
+    //Sprite Facing
+    private Direction dir;
+    private SpriteRenderer sprtRend;
+    //Reflect variables
+    private bool currentlyReflecting = false;
+    private bool canReflect = true;
+    private ProjectileController currentController;
+    private float reflectTimer;
+    public float reflectCooldown;
+    public float reflectDuration;
 
-    
     public enum Controller
     {
         contr0, contr1, contr2, contr3, keyboard
     }
+    public enum Direction
+    {
+        left, right
+    }
     // Start is called before the first frame update
     void Start()
     {
+        jumpKeyUp = true;
+        dir = Direction.left;
+        sprtRend = GetComponent<SpriteRenderer>();
         cntrlSchm = new ControlScheme(controller);
         rb = GetComponent<Rigidbody2D>();
         gun = GetComponentInChildren<GunController>();
@@ -48,18 +67,32 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         checkShoot();
-
+        reflectInput();
     }
     private void FixedUpdate()
     {
         checkPlayerMovement();
-        doReflect();
+        reflectTimer -= Time.deltaTime;
+        checkReflectCooldown();
     }
     public void checkPlayerMovement()
     {
-        grounded = Physics2D.OverlapCircle(groundCheck.transform.position, .2f, ground);
+        //Ground stuff
+        grounded = Physics2D.OverlapCircle(groundCheck.transform.position, .4f, ground);
+        //Horiz. vert. input 
         float horizontalInput = Input.GetAxis(cntrlSchm.HorizontalAxis);
         float verticalInput = Input.GetAxis(cntrlSchm.VerticalAxis);
+        //Sprite Flip
+        if(horizontalInput < 0 && dir == Direction.right)
+        {
+            dir = Direction.left;
+            sprtRend.flipX = !sprtRend.flipX;
+        }
+        else if(horizontalInput > 0 && dir == Direction.left)
+        {
+            dir = Direction.right;
+            sprtRend.flipX = !sprtRend.flipX;
+        }
         //Walk 
         rb.AddForce(playerSpeed * horizontalInput * transform.right);
         if(Mathf.Abs(rb.velocity.x) > maxSpeedX)
@@ -67,38 +100,88 @@ public class PlayerController : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x / 1.1f, rb.velocity.y);
         }
         //Jump
-        if (Input.GetAxis(cntrlSchm.JumpAxis) > 0 && grounded)
+        if (Input.GetAxis(cntrlSchm.JumpAxis) > 0 && grounded && jumpKeyUp)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             if (rb.velocity.y > maxSpeedY)
             {
                 rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y / 1.1f);
             }
+            jumpKeyUp = false;
         }
         //Smaller Jump
         else if (Input.GetAxis(cntrlSchm.JumpAxis) <= 0 && !grounded)
         {
+            jumpKeyUp = true;
             if (rb.velocity.y > 0)
             {
                 rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y / 2);
             }
         }
+        if(Input.GetAxis(cntrlSchm.JumpAxis) <= 0)
+        {
+            jumpKeyUp = true;
+        }
         //Fast Fall
         if (verticalInput < 0 && !grounded)
         {
-            rb.velocity = new Vector2(rb.velocity.x, fastFallMultiplier * jumpForce) * -transform.up;
+            rb.AddForce(-transform.up * fastFallMultiplier * 3, ForceMode2D.Impulse);
+            //rb.velocity = new Vector2(rb.velocity.x, fastFallMultiplier * jumpForce) * -transform.up;
         }
  
     }
 
     public void checkShoot()
     {
-        if (Input.GetMouseButton(0))
+        if (Input.GetAxis(cntrlSchm.ShootAxis) > 0)
         {
             gun.Shoot();
         }
     }
 
+    private void reflectInput()
+    {
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            if (canReflect == true)
+            {
+                currentlyReflecting = true;
+                canReflect = false;
+                reflectTimer = reflectCooldown;
+                waitReflect(reflectDuration);
+            }
+        }
+    }
+
+    private void checkReflectCooldown()
+    {
+        if (reflectTimer < 0)
+        {
+            canReflect = true;
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.collider.GetType() == typeof(CircleCollider2D) && 
+            collision.gameObject.CompareTag("Bullet"))
+        {
+            currentController = collision.gameObject.GetComponent<ProjectileController>();
+            currentController.reflectBullet();
+        }
+    }
+
+    private IEnumerator waitReflect(float reflectTime)
+    {
+        yield return new WaitForSeconds(reflectTime);
+        currentlyReflecting = false;
+    }
+
+    public ControlScheme getControlScheme()
+    {
+        return new ControlScheme(controller);
+    }
+  
 }
 
 
