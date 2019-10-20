@@ -3,7 +3,11 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: [Reflective, Bullet, Bullet]
+  tags:
+  - Reflective
+  - Bullet
+  - Bullet
+  - BulletReflect
   layers:
   - Default
   - TransparentFX

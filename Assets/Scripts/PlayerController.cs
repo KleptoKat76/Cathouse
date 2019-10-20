@@ -31,7 +31,6 @@ public class PlayerController : MonoBehaviour
     //Reflect variables
     private bool currentlyReflecting = false;
     private bool canReflect = true;
-    private ProjectileController currentController;
     private float reflectTimer;
     public float reflectCooldown;
     public float reflectDuration;
@@ -138,17 +137,17 @@ public class PlayerController : MonoBehaviour
             gun.Shoot();
         }
     }
-
+    //Reflect
     private void reflectInput()
     {
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetAxis(cntrlSchm.ReflectAxis) > 0)
         {
             if (canReflect == true)
             {
                 currentlyReflecting = true;
                 canReflect = false;
                 reflectTimer = reflectCooldown;
-                waitReflect(reflectDuration);
+                StartCoroutine(waitReflect(reflectDuration));
             }
         }
     }
@@ -163,11 +162,11 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.GetType() == typeof(CircleCollider2D) && 
+        if (collision.collider.GetType() == typeof(CapsuleCollider2D) && 
             collision.gameObject.CompareTag("Bullet"))
         {
-            currentController = collision.gameObject.GetComponent<ProjectileController>();
-            currentController.reflectBullet();
+            var currentController = collision.gameObject.GetComponent<ProjectileController>();
+            currentController.ReflectBullet();
         }
     }
 

@@ -14,6 +14,7 @@ public class ProjectileController : MonoBehaviour
 
     //Ownership
     private PlayerController.Controller owner;
+    private bool reflected;
 
     private void Start()
     {
@@ -31,9 +32,9 @@ public class ProjectileController : MonoBehaviour
 
     }
 
-    public void reflectBullet()
+    public void ReflectBullet()
     {
-        rb.velocity = new Vector2(-1 * rb.velocity.x, -1 * rb.velocity.y);
+        rb.velocity *= -1;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -47,5 +48,12 @@ public class ProjectileController : MonoBehaviour
             rb.velocity = m_dir * m_speed;
         }
     }
-
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag == "BulletReflect" && !reflected)
+        {
+            ReflectBullet();
+            reflected = true;
+        }
+    }
 }
