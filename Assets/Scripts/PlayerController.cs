@@ -8,7 +8,6 @@ public class PlayerController : MonoBehaviour
     private PlayerGameState.PlayerID playerID;
     //Controller
     public Controller controller;
-    private float parryTime = 1.0f;
     private ControlScheme cntrlSchm;
     //Side Movement
     public float playerSpeed;
@@ -34,6 +33,13 @@ public class PlayerController : MonoBehaviour
     private float reflectTimer;
     public float reflectCooldown;
     public float reflectDuration;
+    private float parryTime = 1.0f;
+    //Wall Jump
+    private GameObject leftWallCheck;
+    private GameObject rightWallCheck;
+    private bool onLeftWall;
+    private bool onRightWall;
+    public float wallJumpSpeed;
 
     public enum Controller
     {
@@ -54,9 +60,17 @@ public class PlayerController : MonoBehaviour
         gun = GetComponentInChildren<GunController>();
         foreach(Transform child in transform)
         {
-            if(child.gameObject.name == "GroundCheck")
+            if(child.name == "GroundCheck")
             {
                 groundCheck = child.gameObject;
+            }
+            if(child.name == "WallCheckRight")
+            {
+                rightWallCheck = child.gameObject;
+            }
+            if(child.name == "WallCheckLeft")
+            {
+                leftWallCheck = child.gameObject;
             }
 
         }
@@ -76,8 +90,13 @@ public class PlayerController : MonoBehaviour
     }
     public void checkPlayerMovement()
     {
-        //Ground stuff
+        //Grounded Checks
         grounded = Physics2D.OverlapCircle(groundCheck.transform.position, .4f, ground);
+        //Wall Jump Checks
+        onLeftWall = Physics2D.OverlapCircle(leftWallCheck.transform.position, .3f, ground);
+        onRightWall = Physics2D.OverlapCircle(rightWallCheck.transform.position, .3f, ground);
+        print("Left: " + onLeftWall);
+        print("Right: " + onRightWall);
         //Horiz. vert. input 
         float horizontalInput = Input.GetAxis(cntrlSchm.HorizontalAxis);
         float verticalInput = Input.GetAxis(cntrlSchm.VerticalAxis);
@@ -108,6 +127,19 @@ public class PlayerController : MonoBehaviour
             }
             jumpKeyUp = false;
         }
+        //Wall Jump
+        else if(Input.GetAxis(cntrlSchm.JumpAxis) > 0 && jumpKeyUp && (onLeftWall || onRightWall) && jumpKeyUp)
+        {
+            if (onLeftWall)
+            {
+                rb.velocity = new Vector2(wallJumpSpeed * 1.5f, wallJumpSpeed);
+            }
+            if (onRightWall)
+            {
+                rb.velocity = new Vector2(-wallJumpSpeed * 1.5f, wallJumpSpeed);
+            }
+            jumpKeyUp = false;
+        }
         //Smaller Jump
         else if (Input.GetAxis(cntrlSchm.JumpAxis) <= 0 && !grounded)
         {
@@ -117,6 +149,7 @@ public class PlayerController : MonoBehaviour
                 rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y / 2);
             }
         }
+        
         if(Input.GetAxis(cntrlSchm.JumpAxis) <= 0)
         {
             jumpKeyUp = true;
@@ -127,7 +160,6 @@ public class PlayerController : MonoBehaviour
             rb.AddForce(-transform.up * fastFallMultiplier * 3, ForceMode2D.Impulse);
             //rb.velocity = new Vector2(rb.velocity.x, fastFallMultiplier * jumpForce) * -transform.up;
         }
- 
     }
 
     public void checkShoot()
