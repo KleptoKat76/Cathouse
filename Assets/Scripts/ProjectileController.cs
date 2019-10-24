@@ -32,7 +32,7 @@ public class ProjectileController : MonoBehaviour
 
     }
 
-    public void ReflectBullet()
+    public void reflectBullet()
     {
         rb.velocity *= -1;
     }
@@ -52,7 +52,7 @@ public class ProjectileController : MonoBehaviour
     {
         if(collision.gameObject.tag == "BulletReflect" && !reflected)
         {
-            ReflectBullet();
+            reflectBullet();
             reflected = true;
         }
     }
