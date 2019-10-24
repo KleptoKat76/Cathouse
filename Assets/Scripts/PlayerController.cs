@@ -33,6 +33,7 @@ public class PlayerController : MonoBehaviour
     private float reflectTimer;
     public float reflectCooldown;
     public float reflectDuration;
+<<<<<<< HEAD
     private float parryTime = 1.0f;
     //Wall Jump
     private GameObject leftWallCheck;
@@ -40,6 +41,9 @@ public class PlayerController : MonoBehaviour
     private bool onLeftWall;
     private bool onRightWall;
     public float wallJumpSpeed;
+=======
+    public GameObject reflectHitbox;
+>>>>>>> 18330941e63ce20095896b999d891e298482dade
 
     public enum Controller
     {
@@ -178,6 +182,7 @@ public class PlayerController : MonoBehaviour
                 currentlyReflecting = true;
                 canReflect = false;
                 reflectTimer = reflectCooldown;
+                Instantiate(reflectHitbox, transform);
                 StartCoroutine(waitReflect(reflectDuration));
             }
         }
@@ -188,16 +193,6 @@ public class PlayerController : MonoBehaviour
         if (reflectTimer < 0)
         {
             canReflect = true;
-        }
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.collider.GetType() == typeof(CapsuleCollider2D) && 
-            collision.gameObject.CompareTag("Bullet"))
-        {
-            var currentController = collision.gameObject.GetComponent<ProjectileController>();
-            currentController.ReflectBullet();
         }
     }
 
