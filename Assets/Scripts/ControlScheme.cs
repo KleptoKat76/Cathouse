@@ -39,6 +39,5 @@ public class ControlScheme : MonoBehaviour
         JumpAxis = controllerType + "_axis_5";
         shootAxis = controllerType + "_axis_6";
         reflectAxis = controllerType + "_axis_7";
-        print(HorizontalAxis);
     }
 }

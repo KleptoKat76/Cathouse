@@ -212,18 +212,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 271fecae1fbf7074ea8c6e6148efbe7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controller: 0
+  controller: 4
   playerSpeed: 45
   maxSpeedX: 7
   maxSpeedY: 1
-  jumpForce: 14
+  jumpForce: 13
   ground:
     serializedVersion: 2
     m_Bits: 256
-  fastFallMultiplier: 0.75
+  fastFallMultiplier: 0.5
   reflectCooldown: 0
   reflectDuration: 0
-  wallJumpSpeed: 0
+  wallJumpSpeed: 15
 --- !u!70 &1761242469
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -284,7 +284,7 @@ PrefabInstance:
     - target: {fileID: 2599204858675451706, guid: 629b3fa8ebf10cb41a58e825b3efc46b,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.081
+      value: -0.117
       objectReference: {fileID: 0}
     - target: {fileID: 2599204858675451706, guid: 629b3fa8ebf10cb41a58e825b3efc46b,
         type: 3}
@@ -335,6 +335,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.996
+      objectReference: {fileID: 0}
+    - target: {fileID: 5600370539787758939, guid: 629b3fa8ebf10cb41a58e825b3efc46b,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2599204858554076063, guid: 629b3fa8ebf10cb41a58e825b3efc46b,
         type: 3}

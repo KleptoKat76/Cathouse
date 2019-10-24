@@ -95,8 +95,6 @@ public class PlayerController : MonoBehaviour
         //Wall Jump Checks
         onLeftWall = Physics2D.OverlapCircle(leftWallCheck.transform.position, .3f, ground);
         onRightWall = Physics2D.OverlapCircle(rightWallCheck.transform.position, .3f, ground);
-        print("Left: " + onLeftWall);
-        print("Right: " + onRightWall);
         //Horiz. vert. input 
         float horizontalInput = Input.GetAxis(cntrlSchm.HorizontalAxis);
         float verticalInput = Input.GetAxis(cntrlSchm.VerticalAxis);
@@ -132,11 +130,11 @@ public class PlayerController : MonoBehaviour
         {
             if (onLeftWall)
             {
-                rb.velocity = new Vector2(wallJumpSpeed * 1.5f, wallJumpSpeed);
+                rb.velocity = new Vector2(wallJumpSpeed, wallJumpSpeed);
             }
             if (onRightWall)
             {
-                rb.velocity = new Vector2(-wallJumpSpeed * 1.5f, wallJumpSpeed);
+                rb.velocity = new Vector2(-wallJumpSpeed, wallJumpSpeed);
             }
             jumpKeyUp = false;
         }
@@ -176,6 +174,7 @@ public class PlayerController : MonoBehaviour
         {
             if (canReflect == true)
             {
+                print("Reflect Activated");
                 currentlyReflecting = true;
                 canReflect = false;
                 reflectTimer = reflectCooldown;
