@@ -33,7 +33,6 @@ public class PlayerController : MonoBehaviour
     private float reflectTimer;
     public float reflectCooldown;
     public float reflectDuration;
-<<<<<<< HEAD
     private float parryTime = 1.0f;
     //Wall Jump
     private GameObject leftWallCheck;
@@ -41,9 +40,7 @@ public class PlayerController : MonoBehaviour
     private bool onLeftWall;
     private bool onRightWall;
     public float wallJumpSpeed;
-=======
     public GameObject reflectHitbox;
->>>>>>> 18330941e63ce20095896b999d891e298482dade
 
     public enum Controller
     {
