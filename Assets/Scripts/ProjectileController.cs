@@ -13,7 +13,7 @@ public class ProjectileController : MonoBehaviour
     private Vector2 m_dir;
 
     //Ownership
-    private PlayerController.Controller owner;
+    private PlayerGameState.PlayerID owner;
     private bool reflected;
 
     private void Start()

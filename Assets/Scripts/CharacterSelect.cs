@@ -2,22 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerGameState : MonoBehaviour
+public class CharacterSelect : MonoBehaviour
 {
-    public enum PlayerID
-    {
-        p1, p2, p3, p4
-    }
-    public enum State
-    {
-        dead, alive
-    }
-    private int colorIndex;
-    private PlayerID playerID;
+    private PlayerInfo info;
     // Start is called before the first frame update
     void Start()
     {
-        
+        info = GameObject.Find("Preloaded").GetComponent<PlayerInfo>();
     }
 
     // Update is called once per frame
