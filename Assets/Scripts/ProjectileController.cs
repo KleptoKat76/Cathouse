@@ -40,6 +40,7 @@ public class ProjectileController : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         //ANDREW 
+    
         if (collision.gameObject.CompareTag("Reflective"))
         {
             Vector2 wallNormal = collision.GetContact(0).normal;
