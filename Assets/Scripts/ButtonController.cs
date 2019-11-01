@@ -3,26 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-[CreateAssetMenu(fileName = "New Button Comtroller", menuName = "New Button Comtroller")]
-
 public class ButtonController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        //SceneManager.UnloadScene();
-    }
+    private static bool tutorialPlayed;
+    public float sceneChangeDelay;
     public void LoadScene(string levelName)
     {
         SceneManager.LoadScene(levelName, LoadSceneMode.Single);
     }
-    public void MainMenuPlayButton(int delay)
+    public void DelayedLoadScene(string name)
     {
-        if ()
-        {
-
-        }
-        Invoke("LoadScene", delay);
+        StartCoroutine(DelayedLoadScene(sceneChangeDelay, name));
     }
     public void Quit()
     {
@@ -30,6 +21,12 @@ public class ButtonController : MonoBehaviour
     }
     public void ActivateScreenTransition(Animator animator)
     {
+        animator.gameObject.SetActive(true);
         animator.SetBool("Activated", true);
+    }
+    private IEnumerator DelayedLoadScene(float delay, string name)
+    {
+        yield return new WaitForSeconds(delay);
+        SceneManager.LoadScene(name);
     }
 }
