@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     //Player ID
-    private PlayerGameState.PlayerID playerID;
+    public PlayerGameState.PlayerID playerID;
     //Controller
     public Controller controller;
     private ControlScheme cntrlSchm;
