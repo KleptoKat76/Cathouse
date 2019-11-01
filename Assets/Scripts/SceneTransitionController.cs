@@ -34,6 +34,7 @@ public class SceneTransitionController : MonoBehaviour
         
         if (transitionAnimator != null)
         {
+            transitionAnimator.gameObject.SetActive(true);
             transitionAnimator.SetBool("Activated", false);
         }
     }
