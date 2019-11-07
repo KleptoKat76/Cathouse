@@ -212,8 +212,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 271fecae1fbf7074ea8c6e6148efbe7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerID: 0
   controller: 4
-  playerSpeed: 45
+  playerSpeed: 50
   maxSpeedX: 7
   maxSpeedY: 1
   jumpForce: 13
@@ -224,6 +225,7 @@ MonoBehaviour:
   reflectCooldown: 0
   reflectDuration: 0
   wallJumpSpeed: 15
+  reflectHitbox: {fileID: 0}
 --- !u!70 &1761242469
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

@@ -8,7 +8,7 @@ public class SceneTransitionController : MonoBehaviour
     private Animator transitionAnimator;
     private void Start()
     {
-        
+         transitionAnimator = GameObject.Find("Black Transition").GetComponent<Animator>();
     }
     void OnEnable()
     {
@@ -24,20 +24,9 @@ public class SceneTransitionController : MonoBehaviour
 
     void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
     {
-        try {
-            transitionAnimator = GameObject.Find("Black Transition").GetComponent<Animator>();
-        }
-        catch
-        {
-            transitionAnimator = null;
-        }
-        
-        if (transitionAnimator != null)
-        {
-            transitionAnimator.gameObject.SetActive(true);
-            transitionAnimator.SetBool("Activated", false);
-        }
+        transitionAnimator = GameObject.Find("Black Transition").GetComponent<Animator>();
+        transitionAnimator.gameObject.SetActive(true);
+        transitionAnimator.SetBool("Activated", false);
     }
-
 
 }

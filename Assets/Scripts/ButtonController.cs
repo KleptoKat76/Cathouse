@@ -7,6 +7,7 @@ public class ButtonController : MonoBehaviour
 {
     private static bool tutorialPlayed;
     public float sceneChangeDelay;
+
     public void LoadScene(string levelName)
     {
         SceneManager.LoadScene(levelName, LoadSceneMode.Single);
@@ -19,14 +20,14 @@ public class ButtonController : MonoBehaviour
     {
         Application.Quit();
     }
-    public void ActivateScreenTransition(Animator animator)
+    public void ActivateScreenTransition()
     {
-        animator.gameObject.SetActive(true);
+        var animator = GameObject.Find("Black Transition").GetComponent<Animator>();
         animator.SetBool("Activated", true);
     }
     private IEnumerator DelayedLoadScene(float delay, string name)
     {
         yield return new WaitForSeconds(delay);
-        SceneManager.LoadScene(name);
+        LoadScene(name);
     }
 }

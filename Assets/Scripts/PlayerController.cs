@@ -41,7 +41,8 @@ public class PlayerController : MonoBehaviour
     private bool onRightWall;
     public float wallJumpSpeed;
     public GameObject reflectHitbox;
-
+    //Animation
+    private Animator anim;
     public enum Controller
     {
         contr0, contr1, contr2, contr3, keyboard
@@ -59,6 +60,7 @@ public class PlayerController : MonoBehaviour
         cntrlSchm = new ControlScheme(controller);
         rb = GetComponent<Rigidbody2D>();
         gun = GetComponentInChildren<GunController>();
+        
         foreach(Transform child in transform)
         {
             if(child.name == "GroundCheck")
@@ -75,6 +77,7 @@ public class PlayerController : MonoBehaviour
             }
 
         }
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -92,6 +95,7 @@ public class PlayerController : MonoBehaviour
     public void checkPlayerMovement()
     {
         //Grounded Checks
+        print(groundCheck.name);
         grounded = Physics2D.OverlapCircle(groundCheck.transform.position, .4f, ground);
         //Wall Jump Checks
         onLeftWall = Physics2D.OverlapCircle(leftWallCheck.transform.position, .3f, ground);
@@ -112,6 +116,14 @@ public class PlayerController : MonoBehaviour
         }
         //Walk 
         rb.AddForce(playerSpeed * horizontalInput * transform.right);
+        if(horizontalInput != 0)
+        {
+            anim.SetBool("Running", true);
+        }
+        else
+        {
+            anim.SetBool("Running", false);
+        }
         if(Mathf.Abs(rb.velocity.x) > maxSpeedX)
         {
             rb.velocity = new Vector2(rb.velocity.x / 1.1f, rb.velocity.y);
