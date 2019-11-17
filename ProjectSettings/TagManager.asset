@@ -51,6 +51,9 @@ TagManager:
   - name: PlayArea
     uniqueID: 1440208103
     locked: 0
+  - name: Reticle
+    uniqueID: 2460646317
+    locked: 0
   - name: Foreground
     uniqueID: 827166587
     locked: 0
