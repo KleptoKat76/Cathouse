@@ -7,13 +7,14 @@ public class ProjectileController : MonoBehaviour
     //Settable Variables
     public float m_speed;
     public float m_dieTime;
+    public int bounces;
 
     //Physics Calculation
     private Rigidbody2D rb;
     private Vector2 m_dir;
 
     //Ownership
-    private PlayerGameState.PlayerID owner;
+    private PlayerController.PlayerID owner;
     private bool reflected;
 
     private void Start()
@@ -29,7 +30,10 @@ public class ProjectileController : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
-
+        if( bounces < 0)
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     public void reflectBullet()
@@ -43,10 +47,13 @@ public class ProjectileController : MonoBehaviour
     
         if (collision.gameObject.CompareTag("Reflective"))
         {
-            Vector2 wallNormal = collision.GetContact(0).normal;
-            m_dir = Vector2.Reflect(rb.velocity, wallNormal).normalized;
-            transform.up = m_dir;
-            rb.velocity = m_dir * m_speed;
+            bounces--;
+            if (bounces >= 0) {
+                Vector2 wallNormal = collision.GetContact(0).normal;
+                m_dir = Vector2.Reflect(rb.velocity, wallNormal).normalized;
+                transform.up = m_dir;
+                rb.velocity = m_dir * m_speed;
+            }
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
@@ -56,5 +63,13 @@ public class ProjectileController : MonoBehaviour
             reflectBullet();
             reflected = true;
         }
+    }
+    public string idString()
+    {
+        return ((int)owner).ToString();
+    }
+    public void SetOwner(PlayerController.PlayerID id)
+    {
+        owner = id;
     }
 }

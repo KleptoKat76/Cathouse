@@ -20,9 +20,17 @@ public class ControlScheme : MonoBehaviour
     public string GunAimYAxis { get => gunAimYAxis; set => gunAimYAxis = value; }
     public string ShootAxis { get => shootAxis; set => shootAxis = value; }
 
-    public ControlScheme(PlayerController.Controller controller){
+    public enum Controller
+    {
+        contr0, contr1, contr2, contr3, keyboard
+    }
+    public ControlScheme(Controller controller){
+        SetControlScheme(controller);
+    }
+    public void SetControlScheme(Controller controller)
+    {
         string controllerType = "";
-        if(controller != PlayerController.Controller.keyboard)
+        if (controller != Controller.keyboard)
         {
             controllerType = "joy_" + controller.ToString().Substring(controller.ToString().Length - 1);
             GunAimXAxis = controllerType + "_axis_3";
