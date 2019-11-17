@@ -51,7 +51,8 @@ public class GunController : MonoBehaviour
     {
         if (timer <= 0)
         {
-            Instantiate(projectile, nozzle.position, nozzle.rotation);
+            GameObject instanceOfProjectile = Instantiate(projectile, nozzle.position, nozzle.rotation);
+            Physics2D.IgnoreCollision(transform.parent.GetComponent<Collider2D>(), instanceOfProjectile.GetComponent<Collider2D>());
             timer = shootCooldown;
         }
     }
