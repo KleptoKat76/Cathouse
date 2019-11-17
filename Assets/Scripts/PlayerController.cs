@@ -145,6 +145,7 @@ public class PlayerController : MonoBehaviour
         {
             if (canReflect == true)
             {
+
                 currentlyReflecting = true;
                 canReflect = false;
                 reflectTimer = reflectCooldown;
