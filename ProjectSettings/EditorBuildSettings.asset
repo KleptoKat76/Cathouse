@@ -4,5 +4,23 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Gameplay Scenes/Preload.unity
+    guid: 575b692cc6944a44884df7b9048f450c
+  - enabled: 1
+    path: Assets/Scenes/Gameplay Scenes/MainMenu.unity
+    guid: 14b12f9c02006ed4984d861ae650e283
+  - enabled: 1
+    path: Assets/Scenes/Gameplay Scenes/CharacterSelect.unity
+    guid: 77f5dbb475cd01d4a95ddbd4fa032f0d
+  - enabled: 1
+    path: Assets/Scenes/Gameplay Scenes/TutorialPlayLevel.unity
+    guid: 73e841a51a04a0549870c19404f4d21a
+  - enabled: 1
+    path: Assets/Scenes/Gameplay Scenes/GunLevelUp.unity
+    guid: 768ff18a8a6dab946ab3cf340e44f3a1
+  - enabled: 1
+    path: Assets/Scenes/Gameplay Scenes/PlayScene.unity
+    guid: 8ff7753ff8e42a947b255ca31203185f
   m_configObjects: {}
