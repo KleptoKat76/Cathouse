@@ -104,6 +104,7 @@ GameObject:
   - component: {fileID: 6522617581133396099}
   - component: {fileID: 1761242469}
   - component: {fileID: 72184139}
+  - component: {fileID: 7223267064397665542}
   m_Layer: 10
   m_Name: Player
   m_TagString: Player
@@ -212,18 +213,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 271fecae1fbf7074ea8c6e6148efbe7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerID: 0
   controller: 4
+  reflectCooldown: 0
+  reflectDuration: 0
   playerSpeed: 50
-  maxSpeedX: 7
+  maxSpeedX: 9
   maxSpeedY: 1
   jumpForce: 13
   ground:
     serializedVersion: 2
     m_Bits: 256
   fastFallMultiplier: 0.5
-  reflectCooldown: 0
-  reflectDuration: 0
   wallJumpSpeed: 15
   reflectHitbox: {fileID: 0}
 --- !u!70 &1761242469
@@ -261,6 +261,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &7223267064397665542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6522617581133396096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9eca9a62c927b9b408ab5aec8a474e57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &9121694895713269197
 PrefabInstance:
   m_ObjectHideFlags: 0

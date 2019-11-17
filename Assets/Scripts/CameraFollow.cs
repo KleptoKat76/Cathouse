@@ -65,6 +65,12 @@ public class CameraFollow : MonoBehaviour
     }
     private void Update()
     {
+        allPlayers = new List<Transform>();
+        var playerGOs = GameObject.FindGameObjectsWithTag("Player");
+        foreach (GameObject e in playerGOs)
+        {
+            allPlayers.Add(e.transform);
+        }
         var twoCurrentFarthestPlayers = FindtwoFarthestPlayers();
         FixedCameraFollowSmooth(Camera.main, twoCurrentFarthestPlayers[0], twoCurrentFarthestPlayers[1]);
     }

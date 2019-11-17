@@ -15,7 +15,7 @@ public class GunController : MonoBehaviour
     {
         controlscheme = transform.parent.GetComponent<PlayerController>().getControlScheme();
         nozzle = transform.GetChild(0);
-        timer = shootCooldown;
+        timer = 0;
     }
 
     // Update is called once per frame
@@ -52,6 +52,7 @@ public class GunController : MonoBehaviour
         if (timer <= 0)
         {
             GameObject instanceOfProjectile = Instantiate(projectile, nozzle.position, nozzle.rotation);
+            instanceOfProjectile.GetComponent<ProjectileController>().SetOwner(transform.parent.GetComponent<PlayerController>().GetID());
             Physics2D.IgnoreCollision(transform.parent.GetComponent<Collider2D>(), instanceOfProjectile.GetComponent<Collider2D>());
             timer = shootCooldown;
         }

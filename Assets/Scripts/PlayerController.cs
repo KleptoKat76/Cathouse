@@ -1,27 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
     //Player ID
-    public PlayerGameState.PlayerID playerID;
+    private PlayerID playerID = PlayerID.p1;
+    private State state = State.alive;
     //Controller
-    public Controller controller;
+    public ControlScheme.Controller controller;
     private ControlScheme cntrlSchm;
-    //Side Movement
-    public float playerSpeed;
-    private Rigidbody2D rb;
-    public float maxSpeedX;
-    public float maxSpeedY;
-    //Jump variables
-    public float jumpForce;
-    public LayerMask ground;
-    private bool grounded;
-    private GameObject groundCheck;
-    private bool jumpKeyUp;
-    //Fast Fall variable
-    public float fastFallMultiplier;
+   
+
     //Shooting variables
     private GunController gun;
     //Sprite Facing
@@ -34,6 +25,24 @@ public class PlayerController : MonoBehaviour
     public float reflectCooldown;
     public float reflectDuration;
     private float parryTime = 1.0f;
+
+
+    //Animation
+    private Animator anim;
+
+     //Side Movement
+    public float playerSpeed;
+    private Rigidbody2D rb;
+    public float maxSpeedX;
+    public float maxSpeedY;
+    //Jump variables
+    public float jumpForce;
+    public LayerMask ground;
+    private bool grounded;
+    private GameObject groundCheck;
+    private bool jumpKeyUp;
+    //Fast Fall variable
+    public float fastFallMultiplier;
     //Wall Jump
     private GameObject leftWallCheck;
     private GameObject rightWallCheck;
@@ -41,11 +50,14 @@ public class PlayerController : MonoBehaviour
     private bool onRightWall;
     public float wallJumpSpeed;
     public GameObject reflectHitbox;
-    //Animation
-    private Animator anim;
-    public enum Controller
+
+    public enum PlayerID
     {
-        contr0, contr1, contr2, contr3, keyboard
+        p1=1, p2=2, p3=3, p4=4
+    }
+    public enum State
+    {
+        dead, alive
     }
     public enum Direction
     {
@@ -57,7 +69,8 @@ public class PlayerController : MonoBehaviour
         jumpKeyUp = true;
         dir = Direction.left;
         sprtRend = GetComponent<SpriteRenderer>();
-        cntrlSchm = new ControlScheme(controller);
+        cntrlSchm = GetComponent<ControlScheme>();
+        cntrlSchm.SetControlScheme(controller);
         rb = GetComponent<Rigidbody2D>();
         gun = GetComponentInChildren<GunController>();
         
@@ -79,7 +92,14 @@ public class PlayerController : MonoBehaviour
         }
         anim = GetComponent<Animator>();
     }
-
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.tag == "Bullet")
+        {
+            state = State.dead;
+            print(gameObject.name + " got hit by " + collision.gameObject.GetComponent<ProjectileController>().idString());
+        }
+    }
     // Update is called once per frame
     void Update()
     {
@@ -95,7 +115,6 @@ public class PlayerController : MonoBehaviour
     public void checkPlayerMovement()
     {
         //Grounded Checks
-        print(groundCheck.name);
         grounded = Physics2D.OverlapCircle(groundCheck.transform.position, .4f, ground);
         //Wall Jump Checks
         onLeftWall = Physics2D.OverlapCircle(leftWallCheck.transform.position, .3f, ground);
@@ -213,9 +232,16 @@ public class PlayerController : MonoBehaviour
 
     public ControlScheme getControlScheme()
     {
-        return new ControlScheme(controller);
+        return GetComponent<ControlScheme>();
     }
-  
+    public bool isDead()
+    {
+        return state == State.dead;
+    }
+    public PlayerID GetID()
+    {
+        return playerID;
+    }
 }
 
 
