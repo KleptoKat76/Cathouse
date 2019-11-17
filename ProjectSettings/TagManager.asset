@@ -8,6 +8,7 @@ TagManager:
   - Bullet
   - Bullet
   - BulletReflect
+  - PlayerReflect
   layers:
   - Default
   - TransparentFX

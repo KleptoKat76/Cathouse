@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7857989782936178720}
   m_Layer: 0
   m_Name: Reflect Hitbox
-  m_TagString: BulletReflect
+  m_TagString: PlayerReflect
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -111,3 +111,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_dieTime: 2
+  bullet:
+    serializedVersion: 2
+    m_Bits: 512
+  farReflect: 0
+  mediumReflect: 0
+  closeReflect: 0

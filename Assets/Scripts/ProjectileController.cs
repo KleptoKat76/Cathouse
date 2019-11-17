@@ -63,6 +63,34 @@ public class ProjectileController : MonoBehaviour
             reflectBullet();
             reflected = true;
         }
+        if (collision.gameObject.tag == "PlayerReflect" && !reflected)
+        {
+            ReflectController reflectController = collision.gameObject.GetComponent<ReflectController>();
+            if (reflectController.closeReflect)
+            {
+                Debug.Log("close");
+                rb.velocity *= -2.0f;
+                reflected = true;
+            }
+            else if (reflectController.mediumReflect)
+            {
+                Debug.Log("med");
+                rb.velocity *= -1.5f;
+                reflected = true;
+            }
+            else if (reflectController.farReflect)
+            {
+                Debug.Log("far");
+                rb.velocity *= -1.25f;
+                reflected = true;
+            }
+            else
+            {
+                Debug.Log("not at all");
+                reflectBullet();
+                reflected = true;
+            }
+        }
     }
     public string idString()
     {
