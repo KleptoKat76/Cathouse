@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class CharacterSelect : MonoBehaviour
 {
@@ -15,5 +16,10 @@ public class CharacterSelect : MonoBehaviour
     void Update()
     {
         
+    }
+    public void ActivateGODeactiveSelf(GameObject obj)
+    { 
+        gameObject.SetActive(false);
+        obj.SetActive(true);
     }
 }

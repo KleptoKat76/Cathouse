@@ -8,8 +8,11 @@ public class PlayerInfo : MonoBehaviour
     private static readonly int MAX_PLAYERS_POSSIBLE = 4;
     private PlayerController[] allPlayers = new PlayerController[MAX_PLAYERS_POSSIBLE];
     private int[] playerScores = new int[] {-1, -1, -1, -1};
+    private float[] gunLevels = new float[] { 0, 0, 0, 0 };
     private bool gameOver = false;
     private ControlScheme[] controlSchemes = new ControlScheme[5];
+    private Dictionary<PlayerController.PlayerID, ControlScheme.Controller> playersIDs =
+        new Dictionary<PlayerController.PlayerID, ControlScheme.Controller>();
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +25,10 @@ public class PlayerInfo : MonoBehaviour
         for (int i = 0; i < playerControls.Length; i++)
         {
             allPlayers[i] = playerControls[i];
+        }
+        for (int i = 1; i < 5; i++)
+        {
+            playersIDs.Add((PlayerController.PlayerID)i, ControlScheme.Controller.na);
         }
     }
 
@@ -36,10 +43,7 @@ public class PlayerInfo : MonoBehaviour
             print("Draw");
             gameOver = true;
         }
-        else if(gameStateResult == 0)
-        {           
-        }
-        else
+        else if(gameStateResult != 0)
         {
             //Specific player won
             //Add to player's points and display victory screen
@@ -79,5 +83,11 @@ public class PlayerInfo : MonoBehaviour
             return null;
         }
         return 0;
+    }
+    public void AddPlayer(ControlScheme controlScheme)
+    {
+        //add playerIDs
+        //
+        
     }
 }

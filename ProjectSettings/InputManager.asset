@@ -647,10 +647,10 @@ InputManager:
     joyNum: 0
   - serializedVersion: 3
     m_Name: keyboard_axis_7
-    descriptiveName: 
+    descriptiveName: Reflect
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: space
+    positiveButton: f
     altNegativeButton: 
     altPositiveButton: 
     gravity: 1000

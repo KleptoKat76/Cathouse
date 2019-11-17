@@ -225,7 +225,8 @@ MonoBehaviour:
     m_Bits: 256
   fastFallMultiplier: 0.5
   wallJumpSpeed: 15
-  reflectHitbox: {fileID: 0}
+  reflectHitbox: {fileID: 8719991848786128029, guid: 78921ac90aedfe541bfea8808349883b,
+    type: 3}
 --- !u!70 &1761242469
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

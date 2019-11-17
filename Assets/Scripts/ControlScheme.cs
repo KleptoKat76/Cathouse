@@ -22,7 +22,7 @@ public class ControlScheme : MonoBehaviour
 
     public enum Controller
     {
-        contr0, contr1, contr2, contr3, keyboard
+        na, contr0, contr1, contr2, contr3, keyboard
     }
     public ControlScheme(Controller controller){
         SetControlScheme(controller);
